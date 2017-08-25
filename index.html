@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <style type="text/css">
+        .navbar-depbud {
+            background-color: rgba(0,0,0,.03);
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: 3px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <nav class="navbar navbar-light navbar-depbud">
+            <a href="#" class="navbar-brand">
+                Depbud
+            </a>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" role="tablist" id="tabs">
+                    <li class="nav-item">
+                        <a href="#deps" class="nav-link active" id="deps-tab" data-toggle="tab" role="tab" aria-controls="deps" aria-expanded="true">
+                            Dependencies    
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#dev-deps" class="nav-link" id="dev-deps-tab" data-toggle="tab" role="tab" aria-controls="dev-deps">
+                            Dev Dependencies    
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="tabsContent">
+
+                    <div class="tab-pane fade show active" id="deps">
+                        <ul class="list-group">
+                            <% _.forIn(david.deps, function(value, key) { %>
+                                <li class="list-group-item">
+                                    <a href="#<%= key %>" class="" data-toggle="collapse">
+                                        <%= key %>
+                                        <span class="badge float-right <%= value.outdated ? 'badge-danger' : 'badge-success' %>">Stable: <%= value.stable %></span>
+                                        <span class="badge <%= value.outdated ? 'badge-danger' : 'badge-success' %> float-right mr-2">Required: <%= value.required %></span>
+                                    </a>
+                                    <div class="collapse" id="<%= key %>">
+                                        <% _.forIn(value.using, function(v, k) { %>
+                                            <p><%= v %></p>
+                                        <% }) %>
+                                    </div>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+
+                    <div class="tab-pane fade" id="dev-deps">
+                        <ul class="list-group">
+                            <% _.forIn(david.devDeps, function(value, key) { %>
+                                <li class="list-group-item">
+                                    <%= key %>
+                                    <span class="badge float-right <%= value.outdated ? 'badge-danger' : 'badge-success' %>">Stable: <%= value.stable %></span>
+                                    <span class="badge <%= value.outdated ? 'badge-danger' : 'badge-success' %> float-right mr-2">Required: <%= value.required %></span>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>                
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+</html>

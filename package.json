@@ -1,0 +1,22 @@
+{
+  "name": "depbud",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "depbud": "./index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "david": "^11.0.0",
+    "depcheck": "^0.6.7",
+    "express": "^4.15.4",
+    "lodash": "^4.17.4",
+    "opn": "^5.1.0",
+    "semver": "^5.4.1"
+  }
+}
