@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Depbud</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <style type="text/css">
         .navbar-depbud {
@@ -12,6 +12,10 @@
             margin: 20px 0;
         }
 
+        .card-depbud {
+            margin-top: 12px;
+        }
+
         .table {
             table-layout:fixed;
         }
@@ -19,6 +23,11 @@
         .table td {
             white-space: nowrap;
             overflow: auto;
+        }
+
+        .table td pre {
+            font-size: 70%;
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -36,20 +45,42 @@
         </nav>
 
         <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="helpLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="helpLabel">Modal title</h5>
+                <h5 class="modal-title" id="helpLabel">Help! What is this?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <p>This is Depbud! (like <a href="https://en.wikipedia.org/wiki/300_(film)" target="_blank">Leonidas</a> would have said it)</p>
+                <p>Ok, bad joke. Depbud is a nifty little dashboard that helps you manage your npm dependencies. There are two main features in Depbud; a quick overview of the version status of your dependencies and showing you in which files these dependencies are used.</p>
+                <p>The first thing to notice is the navigation. You have 5 available tabs. Under here is a brief explanation on what can be found under them: </p>
+                <ul>
+                    <li>
+                        <strong>Dependencies and Dev Dependencies</strong>
+                        <p>From here you can see a list of all your dependencies as they are stated in our package.json file.</p>
+                        <p>Before each dependency there's a little badge. They each represent the state that your dependency is in from looking at which version you're relying on and comparing that to the newest stable version avaiable on NPM.</p>
+                        <p><span class="badge badge-pill badge-danger">&nbsp;</span> Says that there's a newer major version available.</p>
+                        <p><span class="badge badge-pill badge-warning">&nbsp;</span> Says that there's a newer minor or patch version available.</p>
+                        <p><span class="badge badge-pill badge-success">&nbsp;</span> Says that there's you're aligned with the newest version available.</p>
+                        <p>If you expand a dependency you'll see some meta data on that dependency, link to NPM, author, description and some more along with a list of all the files where that dependency is required from.</p>
+                        <p>This makes it easier to know where you're using that, in the event of breaking changes because of an update.</p>
+                    </li>
+                    <li>
+                        <strong>Unused Dependencies and Unused Dev Dependencies:</strong>
+                        <p>From here you'll get a list of all the dependencies stated in your package.json file, which you're not uing in your codebase.</p>
+                        <p>There tabs also include a "quick-fix" command you can fire off, if you want to clean up your package.json file.</p>
+                        <p><strong>Note: Use the "quick-fix" command with caution, as there could be false positives.</strong></p>
+                    </li>
+                    <li>
+                        <strong>Missing Dependencies:</strong>
+                        <p>Here you'll get a list of requried dependencies in your codebase, which was not found in you package.json file</p>
+                        <p>This helps you consider which dependencies you might want to add to you package.json file.</p>
+                        <p><strong>Note: This is still being worked on, so there could be some false positives here</strong></p>
+                    </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -92,36 +123,60 @@
                         <ul class="list-group">
                             <% _.forIn(david.deps, function(value, key) { %>
                                 <li class="list-group-item">
-                                    <a href="#<%= key.replace('.', '♥') %>" class="" data-toggle="collapse">
-                                        <%= key %>
+                                    <a href="#<%= key.replace('.', '♥') %>" class="btn btn-light btn-block text-left" data-toggle="collapse">
                                         <% if (value.diff === 'major') { %>
-                                        <span class="badge badge-danger float-right">Stable: <%= value.stable %></span>
-                                        <span class="badge badge-danger float-right mr-2">Required: <%= value.required %></span>
+                                        <span class="badge badge-pill badge-danger">&nbsp;</span>
                                         <% } else if (value.diff === 'minor' || value.diff === 'patch') { %>
-                                        <span class="badge badge-warning float-right">Stable: <%= value.stable %></span>
-                                        <span class="badge badge-warning float-right mr-2">Required: <%= value.required %></span>
+                                        <span class="badge badge-pill badge-warning">&nbsp;</span>
                                         <% } else { %>
-                                        <span class="badge badge-success float-right">Stable: <%= value.stable %></span>
-                                        <span class="badge badge-success float-right mr-2">Required: <%= value.required %></span>
+                                        <span class="badge badge-pill badge-success">&nbsp;</span>
                                         <% } %>
+                                        <%= key %>
                                     </a>
                                     <div class="collapse" id="<%= key.replace('.', '♥') %>">
-                                        <table class="table table-sm table-striped table-responsive">
-                                            <thead>
-                                                <tr>
-                                                    <th>Path</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            <% _.forIn(value.using, function(v, k) { %>
-                                                <tr>
-                                                    <td>
-                                                        <code><%= v %></code>
-                                                    </td>
-                                                </tr>
-                                            <% }) %>
-                                            </tbody>
-                                        </table>
+                                        <div class="card card-depbud">
+                                            <div class="card-body">
+                                                <a href="https://www.npmjs.com/package/" target="_blank">
+                                                    <h4 class="card-title">&nbsp;</h4>
+                                                </a>
+                                                <a href="https://www.npmjs.com/~" target="_blank">
+                                                    <h6 class="card-subtitle mb-2 text-muted">&nbsp;</h6>
+                                                </a>
+                                                <p class="card-text">&nbsp;</p>
+                                                <% if (value.diff === 'major') { %>
+                                                <div class="alert alert-danger" role="alert">
+                                                  <strong>Whoa!</strong> There is a newer major version available.
+                                                  The required version is <strong><%= value.required %></strong>, but the newest stable is <strong><%= value.stable %></strong>
+                                                </div>
+                                                <% } else if (value.diff === 'minor' || value.diff === 'patch') { %>
+                                                <div class="alert alert-warning" role="alert">
+                                                  <strong>Hmm!</strong> There is a newer minor or patch version available.
+                                                  The required version is <strong><%= value.required %></strong>, but the newest stable is <strong><%= value.stable %></strong>
+                                                </div>
+                                                <% } else { %>
+                                                <div class="alert alert-success" role="alert">
+                                                  <strong>Sweet!</strong> You're on the latest stable.
+                                                  The required version is <strong><%= value.required %></strong>, and the newest stable is <strong><%= value.stable %></strong>
+                                                </div>
+                                                <% } %>
+                                            </div>
+                                            <table class="table table-sm table-striped table-hover table-responsive">
+                                                <thead class="thead-inverse">
+                                                    <tr>
+                                                        <th>Path</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% _.forIn(value.using, function(v, k) { %>
+                                                    <tr>
+                                                        <td>
+                                                            <pre><%= v %></pre>
+                                                        </td>
+                                                    </tr>
+                                                <% }) %>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </li>
                             <% }) %>
@@ -132,36 +187,60 @@
                         <ul class="list-group">
                             <% _.forIn(david.devDeps, function(value, key) { %>
                                 <li class="list-group-item">
-                                    <a href="#<%= key.replace('.', '♥') %>" class="" data-toggle="collapse">
-                                        <%= key %>
+                                    <a href="#<%= key.replace('.', '♥') %>" class="btn btn-light btn-block text-left" data-toggle="collapse">
                                         <% if (value.diff === 'major') { %>
-                                        <span class="badge badge-danger float-right">Stable: <%= value.stable %></span>
-                                        <span class="badge badge-danger float-right mr-2">Required: <%= value.required %></span>
+                                        <span class="badge badge-pill badge-danger">&nbsp;</span>
                                         <% } else if (value.diff === 'minor' || value.diff === 'patch') { %>
-                                        <span class="badge badge-warning float-right">Stable: <%= value.stable %></span>
-                                        <span class="badge badge-warning float-right mr-2">Required: <%= value.required %></span>
+                                        <span class="badge badge-pill badge-warning">&nbsp;</span>
                                         <% } else { %>
-                                        <span class="badge badge-success float-right">Stable: <%= value.stable %></span>
-                                        <span class="badge badge-success float-right mr-2">Required: <%= value.required %></span>
+                                        <span class="badge badge-pill badge-success">&nbsp;</span>
                                         <% } %>
+                                        <%= key %>
                                     </a>
                                     <div class="collapse" id="<%= key.replace('.', '♥') %>">
-                                        <table class="table table-sm table-striped table-responsive">
-                                            <thead>
-                                                <tr>
-                                                    <th>Path</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            <% _.forIn(value.using, function(v, k) { %>
-                                                <tr>
-                                                    <td>
-                                                        <code><%= v %></code>
-                                                    </td>
-                                                </tr>
-                                            <% }) %>
-                                            </tbody>
-                                        </table>
+                                        <div class="card card-depbud">
+                                            <div class="card-body">
+                                                <a href="https://www.npmjs.com/package/" target="_blank">
+                                                    <h4 class="card-title">&nbsp;</h4>
+                                                </a>
+                                                <a href="https://www.npmjs.com/~" target="_blank">
+                                                    <h6 class="card-subtitle mb-2 text-muted">&nbsp;</h6>
+                                                </a>
+                                                <p class="card-text">&nbsp;</p>
+                                                <% if (value.diff === 'major') { %>
+                                                <div class="alert alert-danger" role="alert">
+                                                  <strong>Whoa!</strong> There is a newer major version available.
+                                                  The required version is <strong><%= value.required %></strong>, but the newest stable is <strong><%= value.stable %></strong>
+                                                </div>
+                                                <% } else if (value.diff === 'minor' || value.diff === 'patch') { %>
+                                                <div class="alert alert-warning" role="alert">
+                                                  <strong>Hmm!</strong> There is a newer minor or patch version available.
+                                                  The required version is <strong><%= value.required %></strong>, but the newest stable is <strong><%= value.stable %></strong>
+                                                </div>
+                                                <% } else { %>
+                                                <div class="alert alert-success" role="alert">
+                                                  <strong>Sweet!</strong> You're on the latest stable.
+                                                  The required version is <strong><%= value.required %></strong>, and the newest stable is <strong><%= value.stable %></strong>
+                                                </div>
+                                                <% } %>
+                                            </div>
+                                            <table class="table table-sm table-striped table-hover table-responsive">
+                                                <thead class="thead-inverse">
+                                                    <tr>
+                                                        <th>Path</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% _.forIn(value.using, function(v, k) { %>
+                                                    <tr>
+                                                        <td>
+                                                            <pre><%= v %></pre>
+                                                        </td>
+                                                    </tr>
+                                                <% }) %>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </li>
                             <% }) %>
@@ -169,24 +248,55 @@
                     </div>
 
                     <div class="tab-pane fade" id="unused">
-                        Unused dependencies..
-                        <% _.forIn(depcheck.dependencies, function(value, key) { %>
-                            <p><%= value %></p>
-                        <% }) %>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-primary">
+                                <strong>Quick-fix:</strong>
+                                <code>
+                                    npm uninstall --save 
+                                    <% _.forIn(depcheck.dependencies, function(value, key) { %>
+                                        <%= value %>
+                                    <% }) %>
+                                </code> 
+                            </li>
+                            <% _.forIn(depcheck.dependencies, function(value, key) { %>
+                                <li class="list-group-item">
+                                    <a href="https://www.npmjs.com/package/<%= value %>" target="_blank">
+                                        <%= value %>
+                                    </a>
+                                </li>
+                            <% }) %>
+                        </ul>
                     </div>
 
                     <div class="tab-pane fade" id="unused-dev">
-                        Unused dev dependencies..
-                        <% _.forIn(depcheck.devDependencies, function(value, key) { %>
-                            <p><%= value %></p>
-                        <% }) %>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-primary">
+                                <strong>Quick-fix:</strong>
+                                <code>
+                                    npm uninstall --save-dev 
+                                    <% _.forIn(depcheck.devDependencies, function(value, key) { %>
+                                        <%= value %>
+                                    <% }) %>
+                                </code> 
+                            </li>
+                            <% _.forIn(depcheck.devDependencies, function(value, key) { %>
+                                <li class="list-group-item">
+                                    <a href="https://www.npmjs.com/package/<%= value %>" target="_blank">
+                                        <%= value %>
+                                    </a>
+                                </li>
+                            <% }) %>
+                        </ul>
                     </div>
 
                     <div class="tab-pane fade" id="missing">
-                        Missing dependencies..
-                        <% _.forIn(depcheck.missing, function(value, key) { %>
-                            <p><%= key %></p>
-                        <% }) %>
+                        <ul class="list-group">
+                            <% _.forIn(depcheck.missing, function(value, key) { %>
+                                <li class="list-group-item">
+                                    <%= key %>
+                                </li>
+                            <% }) %>
+                        </ul>
                     </div>
                 </div>                
             </div>
@@ -196,15 +306,20 @@
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script>
-        // ♥
         $(function() {
             $('.collapse').on('show.bs.collapse', function(event) {
                 var packageId = event.currentTarget.id;
-                console.log($('#' + packageId))
+                $.get('/api/info/' + packageId.replace('♥', '.'), function(data) {
+                    $('#' + packageId).find('.card-title').text(data.name)
+                    $('#' + packageId).find('.card-title').parent().attr('href', 'https://www.npmjs.com/package/' + data.name)
+                    $('#' + packageId).find('.card-subtitle').text(data._npmUser.name)
+                    $('#' + packageId).find('.card-subtitle').parent().attr('href', 'https://www.npmjs.com/~' + data._npmUser.name)
+                    $('#' + packageId).find('.card-text').text(data.description)
+                })
             })
         })
     </script>

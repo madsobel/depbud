@@ -90,7 +90,7 @@ fs.readFile('package.json', 'utf8', (err, data) => {
                     console.log('Depbud is running on port 3000!')
                     console.log('Hit ^C to stop')
                     // console.log(JSON.stringify(dependencyData))
-                    // opn('http://localhost:3000')
+                    opn('http://localhost:3000')
                 })
 
             })
