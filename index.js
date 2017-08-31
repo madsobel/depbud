@@ -35,14 +35,12 @@ function parseVersions(deps) {
             deps[prop].required = deps[prop].required.replace(/\^|\~/g, '')
             deps[prop].outdated = semver.gt(deps[prop].stable, deps[prop].required)
             deps[prop].diff = semver.diff(deps[prop].stable, deps[prop].required)
-            // console.log('Diff ->', semver.diff(deps[prop].stable, deps[prop].required))
         }
     }
     return deps
 }
 
 app.get('/', (req, res) => {
-  // console.log(JSON.stringify(dependencyData))
   fs.readFile(path.resolve(__dirname, 'index.html'), 'utf8', (err, template) => {
     const compiled = _.template(template)
     res.send(compiled(dependencyData))
@@ -50,7 +48,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/info/:package', (req, res) => {
-    // req.params.package
     packageJson(req.params.package, {
         fullMetadata: true
     })
@@ -85,12 +82,11 @@ fs.readFile('package.json', 'utf8', (err, data) => {
                     }
                 }
     
-                app.listen(3000, () => {
+                app.listen(1337, () => {
                     spinner.succeed()
-                    console.log('Depbud is running on port 3000!')
+                    console.log('Depbud is running on port 1337!')
                     console.log('Hit ^C to stop')
-                    // console.log(JSON.stringify(dependencyData))
-                    opn('http://localhost:3000')
+                    opn('http://localhost:1337')
                 })
 
             })
