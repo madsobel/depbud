@@ -82,11 +82,11 @@ fs.readFile('package.json', 'utf8', (err, data) => {
                     }
                 }
     
-                app.listen(1337, () => {
+                app.listen(9000, () => {
                     spinner.succeed()
-                    console.log('Depbud is running on port 1337!')
+                    console.log('Depbud is running on port 9000!')
                     console.log('Hit ^C to stop')
-                    opn('http://localhost:1337')
+                    opn('http://localhost:9000')
                 })
 
             })
