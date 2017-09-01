@@ -1,0 +1,4 @@
+deploy:
+  provider: npm
+  email: "madsobelcph@gmail.com"
+  api_key: NPM_AUTH_TOKEN
