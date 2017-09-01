@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Depbud</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <style type="text/css">
         .navbar-depbud {
@@ -132,6 +138,7 @@
                                         <span class="badge badge-pill badge-success">&nbsp;</span>
                                         <% } %>
                                         <%= key %>
+                                        <span class="badge badge-secondary float-right">Used in <strong><%= _.size(value.using) %></strong> files</span>
                                     </a>
                                     <div class="collapse" id="<%= key.replace('.', '♥') %>">
                                         <div class="card card-depbud">
