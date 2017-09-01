@@ -31,4 +31,5 @@ This helps you consider which dependencies you might want to add to you package.
 Depbud must be installed as a global package and can be installed with the `npm install -g depbud` command.
 
 ## Usage
-Depbud assumes that the working directory from which it's being runned has at least a package.json file. From there it analyzes the codebase recursively
+`depbud`
+Depbud assumes that the working directory from which it's being runned has at least a package.json file. From there it analyzes the codebase recursively.
