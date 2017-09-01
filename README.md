@@ -4,7 +4,7 @@ This is Depbud! (like [Leonidas](https://en.wikipedia.org/wiki/300_(film)) would
 
 Ok, bad joke. Depbud is a nifty little dashboard that helps you manage your npm dependencies. There are two main features in Depbud; a quick overview of the version status of your dependencies and showing you in which files these dependencies are used.
 
-Ok, bad joke. Depbud is a nifty little dashboard that helps you manage your npm dependencies. There are two main features in Depbud; a quick overview of the version status of your dependencies and showing you in which files these dependencies are used.
+![Depbud](http://i.imgur.com/1KomTBU.png "Depbud")
 
 ### Dependencies and Dev Dependencies
 From here you can see a list of all your dependencies as they are stated in our package.json file.
