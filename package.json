@@ -1,7 +1,7 @@
 {
   "name": "depbud",
   "version": "0.0.1",
-  "description": "",
+  "description": "A nifty little dashboard that helps you manage your npm dependencies.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,11 @@
   "bin": {
     "depbud": "./index.js"
   },
-  "author": "",
+  "repository" : { 
+    "type" : "git",
+    "url" : "https://github.com/madsobel/depbud.git"
+  },
+  "author": "Mads Obel",
   "license": "MIT",
   "dependencies": {
     "david": "^11.0.0",
