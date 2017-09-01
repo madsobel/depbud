@@ -3,5 +3,6 @@ node_js:
 - '6'
 deploy:
   provider: npm
-  email: "madsobelcph@gmail.com"
-  api_key: NPM_AUTH_TOKEN
+  email: madsobelcph@gmail.com
+  api_key:
+    secure: GUHd2LPOWvm3fvGcvMQy1dEqnRkrE5uQr4milFfIlYPa5Poc3obHjC12pi+n2frHdwEP6O9rg5A0lEmJiETKBtiEYGOGG7jLiVnG9c+c994jjUxzBRkiaE4LfjQRqwn5ogAuLuLPtWrY/cMa2l2ToCQ0Z+GKjaTy2UWD1u6MRTOIDWY8/TBOc1s8hSHuTWqXBFpaLJLmpU8DOHM4ZrjDQMk2/UL+C+Cvl9YXKbl8kvQYjLqsfHfbt1nu1goslV1UDOfiBqnNw+jIKZ43ISs/W15sT0KIwRDv/jIjz7ds5MeEr74niQCMq2sJczRYylpK1wIYcQvlMMiq492tWtgBE1+JMKt7oioi2YoCthP3NlHvCPsGveyVOq8qfQ4xSNZi+P25hnUlATSCsocRSG+XFaXK41180FZQou/3GL6NEoYgKhGNLaBGOAEWWyJiD/q3yeJ1w85bw78NarXiay0KAdwqpByk617As1sjRTCVV3cWM4HwrQFe9evRvCz1A6Nx5W+etWqZswwTLeZ6dB2CCqmk3PIyGTTMyH7kGS5YCKziA6SGNysTYq9wytcZEo87CKdbBuduXEp7BAA1vVdzpDySnpqLM4Idtwqi5jiNvI+gP+gb1GwbTODrY2RUzAxVqCkAj2KPZPeKHMUj3jXYybUYXzfKFnaqto/sVbiOPyc=
