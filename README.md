@@ -14,8 +14,8 @@ Ok, bad joke. Depbud is a nifty little dashboard that helps you manage your npm 
 From here you can see a list of all your dependencies as they are stated in our package.json file.
 Before each dependency there's a little badge. They each represent the state that your dependency is in from looking at which version you're relying on and comparing that to the newest stable version available on NPM.
 
-* ![green dot](http://i.imgur.com/Z0Xw0pz.jpg "green dot") Says that there's a newer major version available.
-* ![yellow dot](http://i.imgur.com/u9m702k.jpg "yellow dot") Says that there's a newer major version available.
+* ![green dot](http://i.imgur.com/Z0Xw0pz.jpg "green dot") Says that there's you're aligned with the newest version available.
+* ![yellow dot](http://i.imgur.com/u9m702k.jpg "yellow dot") Says that there's a newer minor or patch version available.
 * ![red dot](http://i.imgur.com/LVqD9I6.jpg "red dot") Says that there's a newer major version available.
  
 If you expand a dependency you'll see some meta data on that dependency, link to NPM, author, description and some more along with a list of all the files where that dependency is required from.
