@@ -1,4 +1,6 @@
 # Depbud
+[![Travis](https://img.shields.io/travis/madsobel/depbud.svg)]()
+[![David](https://img.shields.io/david/madsobel/depbud.svg)]()
 
 This is Depbud! (like [Leonidas](https://en.wikipedia.org/wiki/300_(film)) would have said it)..
 
