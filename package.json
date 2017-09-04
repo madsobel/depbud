@@ -1,6 +1,6 @@
 {
   "name": "depbud",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A nifty little dashboard that helps you manage your npm dependencies.",
   "main": "index.js",
   "scripts": {
