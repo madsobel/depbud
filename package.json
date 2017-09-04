@@ -15,6 +15,17 @@
   },
   "author": "Mads Obel",
   "license": "MIT",
+  "keywords": [
+    "npm",
+    "dependencies",
+    "devdependencies",
+    "david",
+    "depcheck",
+    "dependency-manager",
+    "check",
+    "unused",
+    "package"
+  ],
   "dependencies": {
     "david": "^11.0.0",
     "depcheck": "^0.6.7",
