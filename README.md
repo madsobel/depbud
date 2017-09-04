@@ -1,4 +1,6 @@
 # Depbud
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/madsobel/depbud.svg)](https://greenkeeper.io/)
 [![Travis](https://img.shields.io/travis/madsobel/depbud.svg)]()
 [![David](https://img.shields.io/david/madsobel/depbud.svg)]()
 
